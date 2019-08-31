@@ -3,7 +3,13 @@
     <div class="w-full mx-auto py-16">
       <h2 class="text-4xl font-bold mb-16">Mechanical Keyboard Switch Database</h2>
 
-      <form class="w-full max-w-lg" name="addSwitch" data-netlify="true">
+      <form
+        class="w-full max-w-lg"
+        name="addSwitch"
+        method="POST"
+        netlify-honeypot="isRequired"
+        data-netlify="true"
+      >
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
@@ -297,7 +303,7 @@
             >Image URL</label>
             <input
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-led-style"
+              id="grid-image"
               type="url"
             />
           </div>
@@ -311,7 +317,7 @@
             >Datasheet URL</label>
             <input
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-led-style"
+              id="grid-datasheet"
               type="url"
             />
           </div>
@@ -325,14 +331,14 @@
             >Notes</label>
             <textarea
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-led-style"
-              type="url"
+              id="grid-notes"
             />
           </div>
         </div>
 
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full px-3">
+            <input class="hidden" id="isRequired" type="texy" />
             <button
               class="w-full py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded focus:outline-none focus:shadow-outline"
               type="submit"
