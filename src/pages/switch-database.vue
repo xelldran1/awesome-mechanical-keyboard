@@ -6,10 +6,13 @@
       <form
         class="w-full max-w-lg"
         name="addSwitch"
-        method="POST"
-        netlify-honeypot="isRequired"
+        method="post"
+        v-on:submit.prevent="handleFormSubmit"
+        action="/success/"
         data-netlify="true"
+        data-netlify-honeypot="isRequired"
       >
+        <input type="hidden" name="form-name" value="addSwitch" />
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
@@ -387,6 +390,7 @@ export default {
     return {
       perPage: 3,
       data: [],
+      formData: {},
       detailRow: SwitchDetailRow,
       fields: [
         { name: "id", visible: false },
@@ -442,6 +446,25 @@ export default {
       .then(response => (this.data = response.data));
   },
   methods: {
+    encode(data) {
+      return Object.keys(data)
+        .map(
+          key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+        )
+        .join("&");
+    },
+    handleFormSubmit(e) {
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: this.encode({
+          "form-name": e.target.getAttribute("name"),
+          ...this.formData
+        })
+      })
+        .then(() => this.$router.push("/success"))
+        .catch(error => alert(error));
+    },
     toggleDetailRow(event) {
       this.$refs.vuetable.toggleDetailRow(event.data.id);
     },
